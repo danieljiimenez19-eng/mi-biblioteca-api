@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1{
+            color: #333;
+        }
+        .book{
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Mi Biblioteca</h1>
+    <div id="books-container"></div>
+
+    <script>
+        fetch("http://127.0.0.1:5000/books")
+        .then(response => response.json())
+        .then(books=> {
+            const container = document.getElementById("books-container")
+            books.forEach(book => {
+                container.innerHTML += `
+                <div class="book">
+                    <h3>${book.title}</h3>
+                    <p>Author: ${book.author}</p>
+                    <p>Pages: ${book.pages}</p>
+                    <p>Available: ${book.available}</p>
+                </div> 
+                `
+            });
+        })
+    </script>
+    
+</body>
+</html>
